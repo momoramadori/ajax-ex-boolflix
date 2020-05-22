@@ -12,21 +12,22 @@ $(document).ready(function() {
                 'query': testo_utente
             },
             'success': function(data) {
-                    for (var i = 0; i < data.results.length; i++) {
-                        var titolo = data.results[i].title;
-                        var titolo_originale = data.results[i].original_title;
-                        var lingua = data.results[i].original_language;
-                        var voto_medio = data.results[i].vote_average;
-                        var context = {
-                            'title': titolo,
-                            'original_title': titolo_originale,
-                            'language': lingua,
-                            'vote': voto_medio
-                        }
-                        console.log(data.results[i]);
-                        var html = template(context);
-                        $('main').append(html)
+                for (var i = 0; i < data.results.length; i++) {
+                    var risultati = data.results[i];
+                    var titolo = risultati.title;
+                    var titolo_originale = risultati.original_title;
+                    var lingua = risultati.original_language;
+                    var voto_medio = risultati.vote_average;
+                    var img = risultati.poster_path;
+                    var context = {
+                        'title': titolo,
+                        'original_title': titolo_originale,
+                        'language': lingua,
+                        'vote': voto_medio,
                     }
+                    var html = template(context);
+                    $('main').append(html)
+                }
             },
             'error': function(){
                 alert('error!')
