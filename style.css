@@ -46,12 +46,14 @@ header .logo img {
 }
 
 main {
+    height: calc(100vh);
     padding-top: 100px;
     color: white;
     z-index: 10;
     display: flex;
     flex-wrap: wrap;
-
+    overflow: hidden;
+    overflow-y: auto;
 }
 
 .entry {
