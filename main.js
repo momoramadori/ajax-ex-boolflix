@@ -19,10 +19,17 @@ $(document).ready(function() {
             'title': risultati.title,
             'original_title': risultati.original_title,
             'language': risultati.original_language,
-            'vote': risultati.vote_average,
+            'vote': Math.ceil(risultati.vote_average / 2)
         }
+
         var html = template(context);
-        $('main').append(html)
+        $('main').append(html);
+    }
+
+    function genera_stelle() {
+        for (var i = 0; i < voto; i++) {
+            array[i]
+        }
     }
 
     function genera_dati(film_trovati) {
