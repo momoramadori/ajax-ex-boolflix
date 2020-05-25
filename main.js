@@ -16,41 +16,34 @@ $(document).ready(function() {
     function disegna_film(risultati) {
         //creo un oggetto da poter inserire nel template di handlebars con i corrispondenti valori
         var context = {
-            'title': risultati.title,
-            'original_title': risultati.original_title,
-            'vote': risultati.vote_average + genera_stelle(risultati.vote_average),
+            'title': risultati.title || risultati.name,
+            'original_title': risultati.original_title || risultati.original_name,
+            'vote': genera_stelle(risultati.vote_average),
             'language': function() {
                 if (risultati.original_language == 'it') {
-                return '<img src="img/flag_it.png">'
-            } else if (risultati.original_language == 'en') {
-                return '<img src="img/flag_en.png">'
-            } else if  (risultati.original_language == 'fr'){
-                return '<img src="img/flag_fr.png">'
-            } else if (risultati.original_language == 'es') {
-                return '<img src="img/flag_es.png">'
-            } else if (risultati.original_language == 'de') {
-                return '<img src="img/flag_de.png">'
-            } else if (risultati.original_language == 'el') {
-                return '<img src="img/flag_el.png">'
-            } else if (risultati.original_language == 'fi') {
-                return '<img src="img/flag_fi.png">'
-            } else {
-                return risultati.original_language;
+                    return '<img src="img/flag_it.png">'
+                } else if (risultati.original_language == 'en') {
+                    return '<img src="img/flag_en.png">'
+                } else if  (risultati.original_language == 'fr'){
+                    return '<img src="img/flag_fr.png">'
+                } else if (risultati.original_language == 'es') {
+                    return '<img src="img/flag_es.png">'
+                } else if (risultati.original_language == 'de') {
+                    return '<img src="img/flag_de.png">'
+                } else if (risultati.original_language == 'el') {
+                    return '<img src="img/flag_el.png">'
+                } else if (risultati.original_language == 'fi') {
+                    return '<img src="img/flag_fi.png">'
+                } else {
+                    return risultati.original_language;
+                }
             }
         }
-    }
-
         var html = template(context);
         $('main').append(html);
+
     }
 
-    // function bandiera_assente(pippo) {
-    //     $('.entry .img').removeClass('active')
-    //     var value_img = $('.entry .img').attr('value')!= 'it'
-    //     if (value_img!= 'it' && value_img!= 'en' && value_img != 'fr') {
-    //         return pippo;
-    //     }
-    // }
     function genera_stelle(voti) {
         var voto = Math.ceil(voti / 2);
         var stella = '';
@@ -82,6 +75,14 @@ $(document).ready(function() {
         $('input').val('');
     }
 
+    function hide_original_title() {
+        $('.entry').each(function(){
+            //se il titolo è uguale al titolo originale li nascondo
+            if($(this).find('h4').attr('value') == $(this).find('p:first-of-type').attr('value')) {
+                $(this).find('p:first-of-type').remove();
+            }
+        })
+    }
     function all_search() {
         //creo una variabile per salvare l'input dell'utente
         var testo_utente = $('input').val();
@@ -99,23 +100,26 @@ $(document).ready(function() {
                 'success': function(data) {
                     var founded_films = data.results;
                     genera_dati(founded_films);
-                    //scorro i singoli risultati ottenuti e
-                    $('.entry').each(function(){
-                        //se il titolo è uguale al titolo originale li nascondo
-                        if($(this).find('h4').attr('value') == $(this).find('p:first-of-type').attr('value')) {
-                            $(this).find('p:first-of-type').remove();
-                        }
-                    })
-                    //se l'oggetto di array dei risultati è vuoto rendo visibile l'avviso di nessun risultato
-                    if(data.results.length == 0) {
-                        $('.no-results').addClass('active');
-                        $('.search').removeClass('active')
-                    } else {
-                        $('.search').addClass('active');
-                        $('.search h2 span').text(testo_utente)
-                    }
+                    hide_original_title();
                 },
                 'error': function(){
+                    alert('error!')
+                }
+            })
+            $.ajax({
+                'url':'https://api.themoviedb.org/3/search/tv',
+                'method':'GET',
+                'data':{
+                    'api_key':'0c5280dc3d5b58e1162d83dd9b44e7d5',
+                    'query':testo_utente,
+                    'language':'it'
+                },
+                'success': function(data) {
+                    var founded_series = data.results;
+                    genera_dati(founded_series);
+                    hide_original_title();
+                },
+                'error': function() {
                     alert('error!')
                 }
             })
@@ -124,3 +128,11 @@ $(document).ready(function() {
         }
     }
 })
+
+// if(risultati.length == 0) {
+//     $('.no-results').addClass('active');
+//     $('.search').removeClass('active')
+// } else {
+//     $('.search').addClass('active');
+//     $('.search h2 span').text(testo_utente)
+// }
