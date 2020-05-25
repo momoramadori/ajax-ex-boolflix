@@ -46,11 +46,12 @@ header .logo img {
 }
 
 main {
-    height: calc(100vh);
-    padding-top: 100px;
+    height: calc(100vh - 200px);
+    padding-top: 50px;
     color: white;
     z-index: 10;
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
     overflow: hidden;
     overflow-y: auto;
@@ -60,6 +61,7 @@ main {
     background-color: black;
     padding: 20px;
     margin: 10px;
+    max-height: 200px;
 }
 
 .entry span {
@@ -72,6 +74,12 @@ main {
     margin-top: 100px;
     text-align: center;
     width: 100%;
+}
+
+.search {
+    display: none;
+    padding-top: 150px;
+    text-align: center;
 }
 
 .active {
