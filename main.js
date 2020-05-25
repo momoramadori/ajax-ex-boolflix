@@ -5,7 +5,7 @@ $(document).ready(function() {
     //intercetto il click sul bottone
     $('button').click(function() {
         //nascondo tutti i film
-        $('div.entry').hide();
+        $('div.entry').remove();
         //nascondo l'avviso di nessun risultato
         $('.no-results').removeClass('active')
         //creo una variabile per salvare l'input dell'utente
@@ -15,7 +15,8 @@ $(document).ready(function() {
             'method':'GET',
             'data':{
                 'api_key':'0c5280dc3d5b58e1162d83dd9b44e7d5',
-                'query': testo_utente
+                'query': testo_utente,
+                'language':'it'
             },
             'success': function(data) {
                 var founded_films = data.results;
@@ -23,7 +24,7 @@ $(document).ready(function() {
 
                 //scorro i singoli risultati ottenuti e
                 $('.entry').each(function(){
-                    // se il titolo è uguale al titolo originale li nascondo
+                    //se il titolo è uguale al titolo originale li nascondo
                     if($(this).find('h4').attr('value') == $(this).find('p:first-of-type').attr('value')) {
                         $(this).find('p:first-of-type').remove();
                     }
@@ -52,6 +53,7 @@ $(document).ready(function() {
             'language': lingua,
             'vote': voto_medio,
         }
+
         var html = template(context);
         $('main').append(html)
     }
