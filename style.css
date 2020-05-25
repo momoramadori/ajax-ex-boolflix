@@ -94,9 +94,15 @@ main {
 
 .no-results {
     display: none;
-    padding-top: 120px;
-    text-align: center;
+    top: 110px;
     width: 100%;
+    text-align: center;
+}
+
+.no-results.active {
+    display: block;
+    position: absolute;
+    
 }
 
 .search {

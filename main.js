@@ -50,7 +50,7 @@ $(document).ready(function() {
                 var founded_elements = data.results;
                 genera_dati(founded_elements);
                 hide_original_title();
-                info_extra(founded_elements,ricerca);
+                info_extra(ricerca);
             },
             'error': function(){
                 alert('error!')
@@ -79,11 +79,13 @@ $(document).ready(function() {
     }
 
     //funzione per generare le scritte relative ai risultati
-    function info_extra(risultati,ricerca) {
-        if(risultati.length == 0) {
+    function info_extra(ricerca) {
+        $('.no-results').removeClass('active');
+        $('.search').removeClass('active');
+        if( $('main').children().length == 1 ) {
             $('.no-results').addClass('active');
-            $('.search').removeClass('active')
-        } else {
+            $('.search').removeClass('active');
+        } else if ($('main').children().length > 1){
             $('.search').addClass('active');
             $('.search h2 span').text(ricerca)
         }
