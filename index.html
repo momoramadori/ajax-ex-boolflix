@@ -22,20 +22,20 @@
                 </div>
             </div>
         </header>
-        <!-- <div class="search">
+        <div class="search">
             <h2>Risultati per la ricerca: <span></span></h2>
-        </div> -->
+        </div>
         <main>
-            <!-- <div class="no-results">
+            <div class="no-results">
                 <h2>La ricerca non ha prodotto alcuni risulato..</h2>
-            </div> -->
+            </div>
         </main>
         <script id="entry-template" type="text/x-handlebars-template">
             <div class="entry">
                 <h4 value='{{title}}'><span>Titolo: </span>{{title}}</h4>
                 <p value='{{original_title}}'><span>Titolo originale: </span>{{original_title}}</p>
-                <p class='lingua' value='{{language}}'><span>Lingua originale: </span>{{language}}</p>
-                <p class="voto" value='{{vote}}'><span>Voto medio: </span>{{vote}}</p>
+                <p class='lingua' value='{{language}}'><span>Lingua originale: </span>{{{language}}}</p>
+                <p class="voto" value='{{vote}}'><span>Voto medio: </span>{{{vote}}}</p>
             </div>
         </script>
         <script src="main.js" charset="utf-8"></script>

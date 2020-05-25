@@ -11,9 +11,9 @@ color: white;
 
 .background {
     width: 100%;
-    height: 100%;
+    height: calc(100vh);
     position: absolute;
-    top: 0;
+    top: 100px;
     left: 0;
     background-image: url(img/sfondo.jpg);
     opacity: 0.8;
@@ -46,8 +46,7 @@ header .logo img {
 }
 
 main {
-    height: calc(100vh);
-    padding-top: 100px;
+    height: calc(100vh - 68px);
     color: white;
     z-index: 10;
     display: flex;
@@ -69,9 +68,13 @@ main {
     font-size: 14px;
 }
 
+.entry p i {
+    color: yellow;
+}
+
 .no-results {
     display: none;
-    margin-top: 100px;
+    padding-top: 120px;
     text-align: center;
     width: 100%;
 }
@@ -82,7 +85,8 @@ main {
 
 .search {
     display: none;
-    padding-top: 150px;
+    padding-top: 120px;
+    padding-bottom: 20px;
     text-align: center;
 }
 
