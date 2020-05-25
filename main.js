@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
     var source   = $("#entry-template").html();
     var template = Handlebars.compile(source);
 
@@ -13,19 +14,13 @@ $(document).ready(function() {
     });
 
     function disegna_film(risultati) {
-        //salvo i valori delle chiavi che mi interessano
-        var titolo = risultati.title;
-        var titolo_originale = risultati.original_title;
-        var lingua = risultati.original_language;
-        var voto_medio = risultati.vote_average;
         //creo un oggetto da poter inserire nel template di handlebars con i corrispondenti valori
         var context = {
-            'title': titolo,
-            'original_title': titolo_originale,
-            'language': lingua,
-            'vote': voto_medio,
+            'title': risultati.title,
+            'original_title': risultati.original_title,
+            'language': risultati.original_language,
+            'vote': risultati.vote_average,
         }
-
         var html = template(context);
         $('main').append(html)
     }
