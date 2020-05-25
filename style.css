@@ -61,7 +61,7 @@ main {
     background-color: black;
     padding: 20px;
     margin: 10px;
-    max-height: 200px;
+    max-height: 300px;
 }
 
 .entry span {
@@ -74,6 +74,10 @@ main {
     margin-top: 100px;
     text-align: center;
     width: 100%;
+}
+
+.entry .img {
+    display: none;
 }
 
 .search {

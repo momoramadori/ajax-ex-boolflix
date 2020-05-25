@@ -18,18 +18,50 @@ $(document).ready(function() {
         var context = {
             'title': risultati.title,
             'original_title': risultati.original_title,
-            'language': risultati.original_language,
-            'vote': Math.ceil(risultati.vote_average / 2)
+            'vote': risultati.vote_average + genera_stelle(risultati.vote_average),
+            'language': function() {
+                if (risultati.original_language == 'it') {
+                return '<img src="img/flag_it.png">'
+            } else if (risultati.original_language == 'en') {
+                return '<img src="img/flag_en.png">'
+            } else if  (risultati.original_language == 'fr'){
+                return '<img src="img/flag_fr.png">'
+            } else if (risultati.original_language == 'es') {
+                return '<img src="img/flag_es.png">'
+            } else if (risultati.original_language == 'de') {
+                return '<img src="img/flag_de.png">'
+            } else if (risultati.original_language == 'el') {
+                return '<img src="img/flag_el.png">'
+            } else if (risultati.original_language == 'fi') {
+                return '<img src="img/flag_fi.png">'
+            } else {
+                return risultati.original_language;
+            }
         }
+    }
 
         var html = template(context);
         $('main').append(html);
     }
 
-    function genera_stelle() {
+    // function bandiera_assente(pippo) {
+    //     $('.entry .img').removeClass('active')
+    //     var value_img = $('.entry .img').attr('value')!= 'it'
+    //     if (value_img!= 'it' && value_img!= 'en' && value_img != 'fr') {
+    //         return pippo;
+    //     }
+    // }
+    function genera_stelle(voti) {
+        var voto = Math.ceil(voti / 2);
+        var stella = '';
+        var stella_vuota ='';
         for (var i = 0; i < voto; i++) {
-            array[i]
+            stella += '<i class="fas fa-star"></i>';
         }
+        for (var i = 0; i < 5-voto; i++) {
+            stella_vuota +='<i class="far fa-star"></i>'
+        }
+        return stella + stella_vuota
     }
 
     function genera_dati(film_trovati) {
