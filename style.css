@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Source Sans Pro', sans-serif;
 }
 
 body {
@@ -44,6 +45,17 @@ header .logo img {
     height: 50px;
 }
 
+header input, header button {
+    border: 1px solid white;
+    background-color: black;
+    color: white;
+    padding: 2px 5px;
+}
+
+header input:focus {
+    outline: 0;
+}
+
 main {
     height: calc(100vh);
     padding-top: 150px;
@@ -64,6 +76,7 @@ main {
     padding: 1px;
     border: 1px solid white;
     margin: 10px;
+    overflow-y: auto;
 }
 
 .entry span {
@@ -75,15 +88,15 @@ main {
     color: yellow;
 }
 
+.entry .img {
+    display: none;
+}
+
 .no-results {
     display: none;
     padding-top: 120px;
     text-align: center;
     width: 100%;
-}
-
-.entry .img {
-    display: none;
 }
 
 .search {
@@ -96,9 +109,6 @@ main {
 .search.active {
     display: block;
     position: absolute;
-}
-.active {
-    display: block;
 }
 
 .entry-hover {
@@ -118,4 +128,8 @@ main {
     opacity: 1;
     transition: opacity 1s;
     padding: 10px;
+}
+
+.active {
+    display: block;
 }
