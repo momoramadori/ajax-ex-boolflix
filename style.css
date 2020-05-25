@@ -13,7 +13,6 @@ color: white;
     width: 100%;
     height: calc(100vh);
     position: absolute;
-    top: 100px;
     left: 0;
     background-image: url(img/sfondo.jpg);
     opacity: 0.8;
@@ -46,7 +45,8 @@ header .logo img {
 }
 
 main {
-    height: calc(100vh - 68px);
+    height: calc(100vh);
+    padding-top: 150px;
     color: white;
     z-index: 10;
     display: flex;
@@ -57,10 +57,13 @@ main {
 }
 
 .entry {
+    position: relative;
+    width: 350px;
+    height: 525px;
     background-color: black;
-    padding: 20px;
+    padding: 1px;
+    border: 1px solid white;
     margin: 10px;
-    max-height: 300px;
 }
 
 .entry span {
@@ -85,11 +88,34 @@ main {
 
 .search {
     display: none;
-    padding-top: 120px;
-    padding-bottom: 20px;
+    top: 110px;
+    width: 100%;
     text-align: center;
 }
 
+.search.active {
+    display: block;
+    position: absolute;
+}
 .active {
     display: block;
+}
+
+.entry-hover {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.entry:hover .copertina{
+    opacity: 0;
+    object-fit: cover;
+    transition: opacity 1s;
+}
+
+.entry:hover .entry-hover {
+    opacity: 1;
+    transition: opacity 1s;
+    padding: 10px;
 }

@@ -96,7 +96,9 @@ $(document).ready(function() {
             'title': risultati.title || risultati.name,
             'original_title': risultati.original_title || risultati.original_name,
             'vote': genera_stelle(risultati.vote_average),
-            'language': bandiere_lingua(risultati.original_language)
+            'language': bandiere_lingua(risultati.original_language),
+            'immagine': risultati.poster_path,
+            'riassunto': risultati.overview
         }
         var html = template(context);
         $('main').append(html);
