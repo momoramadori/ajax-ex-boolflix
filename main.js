@@ -34,17 +34,21 @@ $(document).ready(function() {
         }
     }
 
+    function reset_iniziale() {
+        //nascondo tutti i film
+        $('div.entry').remove();
+        //nascondo l'avviso di nessun risultato
+        $('.no-results').removeClass('active')
+        //svuoto l'input
+        $('input').val('');
+    }
+
     function all_search() {
+        //creo una variabile per salvare l'input dell'utente
+        var testo_utente = $('input').val();
         //se l'input non ha caratteri non faccio la chiamata ajax
         if (!($('input').val()).trim() == '') {
-            //nascondo tutti i film
-            $('div.entry').remove();
-            //nascondo l'avviso di nessun risultato
-            $('.no-results').removeClass('active')
-            //creo una variabile per salvare l'input dell'utente
-            var testo_utente = $('input').val();
-            //svuoto l'input
-            $('input').val('');
+            reset_iniziale();
             $.ajax({
                 'url':'https://api.themoviedb.org/3/search/movie',
                 'method':'GET',
@@ -56,7 +60,6 @@ $(document).ready(function() {
                 'success': function(data) {
                     var founded_films = data.results;
                     genera_dati(founded_films);
-
                     //scorro i singoli risultati ottenuti e
                     $('.entry').each(function(){
                         //se il titolo è uguale al titolo originale li nascondo
