@@ -32,15 +32,19 @@
             </div>
         </main>
         <script id="entry-template" type="text/x-handlebars-template">
-            <div class="entry">
-                <img class='copertina' src="https://image.tmdb.org/t/p/w342{{immagine}}" alt="">
-                <div class="entry-hover">
-                    <h4 value='{{title}}'><span>Titolo: </span>{{title}}</h4>
-                    <p value='{{original_title}}'><span>Titolo originale: </span>{{original_title}}</p>
-                    <p class='lingua' value='{{language}}'><span>Lingua originale: </span>{{{language}}}</p>
-                    <p><span>Tipologia:</span>{{tipo}}</p>
-                    <p class="voto" value='{{vote}}'><span>Voto medio: </span>{{{vote}}}</p>
-                    <p>{{riassunto}}</p>
+            <div class='entry-container'>
+                <div class="entry">
+                    <div class='img-container'>
+                        <img class='copertina' src="{{immagine}}" alt="">
+                    </div>
+                    <div class="entry-hover">
+                        <h4 value='{{title}}'><span>Titolo: </span>{{title}}</h4>
+                        <p value='{{original_title}}'><span>Titolo originale: </span>{{original_title}}</p>
+                        <p class='lingua' value='{{language}}'><span>Lingua originale: </span>{{{language}}}</p>
+                        <p><span>Tipologia:</span>{{tipo}}</p>
+                        <p class="voto" value='{{vote}}'><span>Voto medio: </span>{{{vote}}}</p>
+                        <p>{{riassunto}}</p>
+                    </div>
                 </div>
             </div>
         </script>

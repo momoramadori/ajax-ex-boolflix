@@ -2,7 +2,7 @@ $(document).ready(function() {
 
     var api_key = '0c5280dc3d5b58e1162d83dd9b44e7d5';
     var url_base = 'https://api.themoviedb.org/3/search/';
-    
+
     var source   = $("#entry-template").html();
     var template = Handlebars.compile(source);
     //intercetto il click sul bottone
@@ -67,6 +67,8 @@ $(document).ready(function() {
         for (var i = 0; i < film_trovati.length; i++) {
             //utilizzo una variabile per salvare gli oggetti
             var risultati = film_trovati[i];
+            console.log(risultati);
+            
             disegna_film(risultati,tipo)
         }
     }
@@ -102,13 +104,20 @@ $(document).ready(function() {
             'original_title': risultati.original_title || risultati.original_name,
             'vote': genera_stelle(risultati.vote_average),
             'language': bandiere_lingua(risultati.original_language),
-            'immagine': risultati.poster_path,
+            'immagine': genera_immagini(risultati.poster_path),
             'riassunto': risultati.overview,
             'tipo': tipologia
         }
         var html = template(context);
         $('main').append(html);
 
+    }
+
+    //funzione per generare immagine sostitutiva nelle immagini senza path 
+    function genera_immagini(img) {
+        if (img === null) {
+            return 'img/errore1.png'
+        } return 'https://image.tmdb.org/t/p/w342' + img
     }
 
     //funzione per generare le stelle
