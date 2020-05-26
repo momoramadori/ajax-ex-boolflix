@@ -111,14 +111,14 @@ $(document).ready(function() {
     function genera_stelle(voti) {
         var voto = Math.ceil(voti / 2);
         var stella = '';
-        var stella_vuota ='';
-        for (var i = 0; i < voto; i++) {
-            stella += '<i class="fas fa-star"></i>';
-        }
-        for (var i = 0; i < 5-voto; i++) {
-            stella_vuota +='<i class="far fa-star"></i>'
-        }
-        return stella + stella_vuota
+        for (var i = 1; i <= 5; i++) {
+            if (i <= voto) {
+                stella += '<i class="fas fa-star"></i>';
+            } else {
+                stella +='<i class="far fa-star"></i>'
+            }
+        } 
+        return stella 
     }
 
     //funzione per generare le bandiere
