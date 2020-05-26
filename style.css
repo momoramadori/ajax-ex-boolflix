@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: 'Righteous', cursive;
 }
 
 body {
@@ -30,7 +30,7 @@ header {
     width: 100%;
     position: fixed;
     background-color: black;
-    z-index: 100;;
+    z-index: 100;
 }
 
 .header-wrapper {
@@ -58,7 +58,8 @@ header input:focus {
 
 main {
     height: calc(100vh);
-    padding-top: 150px;
+    padding-top:100px;
+    /* padding-top: 150px; */
     color: white;
     z-index: 10;
     display: flex;
@@ -69,11 +70,8 @@ main {
 }
 
 .entry {
-    width: 342px;
-    height: 520px;
-    margin: 10px;
+    width: 20%;
     background-color: black;
-    border: 1px solid white;
     z-index: 10;
     position: relative;
     overflow-y: auto;
@@ -123,8 +121,8 @@ main {
 }
 
 .copertina {
-    width: auto;
-    height: 513px;
+    width: 100%;
+    height: auto;
 }
 
 .entry:hover .copertina {
@@ -148,6 +146,13 @@ main {
     .logo, .ricerca {
         text-align: center;
         margin: auto;
+    }
+    .entry {
+        width: 50%;
+    }
+
+    .entry .overview {
+        display: none;
     }
 
 }

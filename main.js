@@ -68,7 +68,6 @@ $(document).ready(function() {
             //utilizzo una variabile per salvare gli oggetti
             var risultati = film_trovati[i];
             console.log(risultati);
-            
             disegna_film(risultati,tipo)
         }
     }
@@ -105,19 +104,13 @@ $(document).ready(function() {
             'vote': genera_stelle(risultati.vote_average),
             'language': bandiere_lingua(risultati.original_language),
             'immagine': genera_immagini(risultati.poster_path),
+            // 'cast': 'https://api.themoviedb.org/3/credit/'+ risultati.id,
             'riassunto': risultati.overview,
             'tipo': tipologia
         }
         var html = template(context);
         $('main').append(html);
 
-    }
-
-    //funzione per generare immagine sostitutiva nelle immagini senza path 
-    function genera_immagini(img) {
-        if (img === null) {
-            return 'img/errore1.png'
-        } return 'https://image.tmdb.org/t/p/w342' + img
     }
 
     //funzione per generare le stelle
@@ -139,8 +132,16 @@ $(document).ready(function() {
         var lingue = ['it','en','fr','de','el','fi','es']
         if (lingue.includes(lingua)) {
             return '<img src="img/flag_'+lingua+'.png">'
-        } else {
-            return lingua;
-        }
+        } return lingua;
     }
+
+    //funzione per generare immagine sostitutiva nelle immagini senza path 
+    function genera_immagini(img) {
+        if (img === null) {
+            return 'img/netflix_black.png'
+        } return 'https://image.tmdb.org/t/p/w342' + img
+    }
+    
 })
+
+//per riuscire a fare la milestone 5 creare una chiamata ajax che generi l'url dinamicamente in base al film preso in considerazione (altra chiamata ajax) DA FARE DOMANI

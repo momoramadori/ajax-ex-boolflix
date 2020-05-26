@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Boolflix</title>
         <link rel="stylesheet" href="style.css">
-        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@600&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
         <script src="https://kit.fontawesome.com/a41fcd4d62.js" crossorigin="anonymous"></script>
@@ -24,9 +24,9 @@
                 </div>
             </div>
         </header>
-        <div class="search">
+        <!-- <div class="search">
             <h2>Risultati per la ricerca: <span></span></h2>
-        </div>
+        </div> -->
         <main>
             <div class="no-results">
                 <h2>La ricerca non ha prodotto alcuni risulato..</h2>
@@ -39,9 +39,10 @@
                         <h4 value='{{title}}'><span>Titolo: </span>{{title}}</h4>
                         <p value='{{original_title}}'><span>Titolo originale: </span>{{original_title}}</p>
                         <p class='lingua' value='{{language}}'><span>Lingua originale: </span>{{{language}}}</p>
+                        <!-- <p>{{cast}}</p> -->
                         <p><span>Tipologia:</span>{{tipo}}</p>
                         <p class="voto" value='{{vote}}'><span>Voto medio: </span>{{{vote}}}</p>
-                        <p>{{riassunto}}</p>
+                        <p class='overview'>{{riassunto}}</p>
                     </div>
                 </div>
             </div>
