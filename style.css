@@ -75,8 +75,14 @@ main {
     z-index: 10;
     position: relative;
     overflow-y: auto;
+    transition: all 500ms ease-in-out;
 }
 
+.entry:hover .entry {
+    z-index: 100;
+    transform: scale(1.5);
+
+}
 
 .entry span {
     color: grey;
