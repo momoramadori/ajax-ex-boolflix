@@ -1,5 +1,8 @@
 $(document).ready(function() {
 
+    var api_key = '0c5280dc3d5b58e1162d83dd9b44e7d5';
+    var url_base = 'https://api.themoviedb.org/3/search/';
+    
     var source   = $("#entry-template").html();
     var template = Handlebars.compile(source);
     //intercetto il click sul bottone
@@ -19,8 +22,8 @@ $(document).ready(function() {
         //se l'input non ha caratteri non faccio la chiamata ajax
         if (!($('input').val()).trim() == '') {
             reset_iniziale();
-            ajax_call(testo_utente,'https://api.themoviedb.org/3/search/movie',' Movie');
-            ajax_call(testo_utente,'https://api.themoviedb.org/3/search/tv',' Serie tv');
+            ajax_call(testo_utente,'movie',' Movie');
+            ajax_call(testo_utente,'tv',' Serie tv');
         } else {
             alert('devi digitare almeno 2 caratteri')
         }
@@ -39,10 +42,10 @@ $(document).ready(function() {
     //funzione per la singola chiamata ajax
     function ajax_call(ricerca, url, tipo) {
         $.ajax({
-            'url':url,
+            'url': url_base + url,
             'method':'GET',
             'data':{
-                'api_key':'0c5280dc3d5b58e1162d83dd9b44e7d5',
+                'api_key': api_key,
                 'query': ricerca,
                 'language':'it'
             },
