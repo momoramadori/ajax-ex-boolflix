@@ -19,8 +19,8 @@ $(document).ready(function() {
         //se l'input non ha caratteri non faccio la chiamata ajax
         if (!($('input').val()).trim() == '') {
             reset_iniziale();
-            ajax_call(testo_utente,'https://api.themoviedb.org/3/search/movie');
-            ajax_call(testo_utente,'https://api.themoviedb.org/3/search/tv');
+            ajax_call(testo_utente,'https://api.themoviedb.org/3/search/movie',' Movie');
+            ajax_call(testo_utente,'https://api.themoviedb.org/3/search/tv',' Serie tv');
         } else {
             alert('devi digitare almeno 2 caratteri')
         }
@@ -37,7 +37,7 @@ $(document).ready(function() {
     }
 
     //funzione per la singola chiamata ajax
-    function ajax_call(ricerca, url) {
+    function ajax_call(ricerca, url, tipo) {
         $.ajax({
             'url':url,
             'method':'GET',
@@ -48,7 +48,7 @@ $(document).ready(function() {
             },
             'success': function(data) {
                 var founded_elements = data.results;
-                genera_dati(founded_elements);
+                genera_dati(founded_elements,tipo);
                 hide_original_title();
                 info_extra(ricerca);
             },
@@ -59,12 +59,12 @@ $(document).ready(function() {
     }
 
     //funzione per scorrere i singoli risultati della ricerca
-    function genera_dati(film_trovati) {
+    function genera_dati(film_trovati,tipo) {
         //utilizzo un ciclo per scorrere gli oggetti e reperire ciò che mi interessa
         for (var i = 0; i < film_trovati.length; i++) {
             //utilizzo una variabile per salvare gli oggetti
             var risultati = film_trovati[i];
-            disegna_film(risultati)
+            disegna_film(risultati,tipo)
         }
     }
 
@@ -92,7 +92,7 @@ $(document).ready(function() {
     }
 
     //funzione per assegnare i valori dei risultati all'html con handlebars
-    function disegna_film(risultati) {
+    function disegna_film(risultati,tipologia) {
         //creo un oggetto da poter inserire nel template di handlebars con i corrispondenti valori
         var context = {
             'title': risultati.title || risultati.name,
@@ -100,7 +100,8 @@ $(document).ready(function() {
             'vote': genera_stelle(risultati.vote_average),
             'language': bandiere_lingua(risultati.original_language),
             'immagine': risultati.poster_path,
-            'riassunto': risultati.overview
+            'riassunto': risultati.overview,
+            'tipo': tipologia
         }
         var html = template(context);
         $('main').append(html);
