@@ -6,7 +6,7 @@ $(document).ready(function() {
     var source   = $("#entry-template").html();
     var template = Handlebars.compile(source);
     //intercetto il click sul bottone
-    $('button').click(all_search)
+    $('.btn').click(all_search)
     //stesso evento con invio
     $('header input').keypress(function(event) {
         // verifico se l'utente ha digitato "ENTER"

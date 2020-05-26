@@ -30,7 +30,7 @@ header {
     width: 100%;
     position: fixed;
     background-color: black;
-    z-index: 10;
+    z-index: 100;;
 }
 
 .header-wrapper {
@@ -68,40 +68,17 @@ main {
     overflow-y: auto;
 }
 
-.entry-container {
-    perspective: 1000px;
-    width: 342px;
-    height: 512px;
-    margin: 20px 10px 10px;
-}
-
 .entry {
+    width: 342px;
+    height: 520px;
+    margin: 10px;
     background-color: black;
     border: 1px solid white;
+    z-index: 10;
     position: relative;
-    width: 100%;
-    height: 100%;
-    transition: transform 0.8s;
-    transform-style: preserve-3d;
-}
-
-.entry-container:hover .entry {
-    transform: rotateY(180deg);
-}
-
-.img-container, .entry-hover {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    -webkit-backface-visibility: hidden; /* Safari */
-    backface-visibility: hidden;
-}
-
-.entry-hover {
-    transform: rotateY(180deg);
-    padding: 10px;
     overflow-y: auto;
 }
+
 
 .entry span {
     color: grey;
@@ -122,6 +99,7 @@ main {
 .no-results.active {
     display: block;
     position: absolute;
+    
 }
 
 .search {
@@ -134,14 +112,42 @@ main {
 .search.active {
     display: block;
     position: absolute;
-    z-index: 0;
+}
+
+.entry-hover {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 10px;
+}
+
+.copertina {
+    width: auto;
+    height: 513px;
+}
+
+.entry:hover .copertina {
+    opacity: 0.2;
+    transition: opacity 1s;
+}
+
+.entry:hover .entry-hover {
+    opacity: 1;
+    transition: opacity 1s;
 }
 
 .active {
     display: block;
 }
 
-.copertina {
-    max-width: 100%;
-    height: auto;
+@media (max-width:768px) {
+    .header-wrapper {
+        display: block;
+    }
+    .logo, .ricerca {
+        text-align: center;
+        margin: auto;
+    }
+
 }

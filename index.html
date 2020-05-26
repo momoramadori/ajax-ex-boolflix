@@ -2,6 +2,7 @@
 <html lang="en" dir="ltr">
     <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Boolflix</title>
         <link rel="stylesheet" href="style.css">
         <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@600&display=swap" rel="stylesheet">
@@ -32,11 +33,9 @@
             </div>
         </main>
         <script id="entry-template" type="text/x-handlebars-template">
-            <div class='entry-container'>
+            <div class='entry-container'></div>
                 <div class="entry">
-                    <div class='img-container'>
-                        <img class='copertina' src="{{immagine}}" alt="">
-                    </div>
+                    <img class='copertina' src="{{immagine}}" alt="">
                     <div class="entry-hover">
                         <h4 value='{{title}}'><span>Titolo: </span>{{title}}</h4>
                         <p value='{{original_title}}'><span>Titolo originale: </span>{{original_title}}</p>
@@ -46,6 +45,8 @@
                         <p>{{riassunto}}</p>
                     </div>
                 </div>
+            </div>
+               
             </div>
         </script>
         <script src="main.js" charset="utf-8"></script>
