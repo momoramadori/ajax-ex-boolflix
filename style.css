@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Righteous', cursive;
+    font-family: 'Josefin Sans', sans-serif;
 }
 
 body {
@@ -45,13 +45,24 @@ header .logo img {
     height: 50px;
 }
 
-header input, header button {
+header input {
     border: 1px solid white;
     background-color: black;
     color: white;
-    padding: 2px 5px;
+    padding: 5px 10px;
+    border-radius: 10px;
 }
 
+header button {
+    border: 1px solid white;
+    background-color: rgb(167, 43, 51);
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    margin-left: -20px;
+    padding: 5px 10px;
+    color: white;
+    font-size: 12px;
+}
 header input:focus {
     outline: 0;
 }
@@ -59,30 +70,28 @@ header input:focus {
 main {
     height: calc(100vh);
     padding-top:100px;
-    /* padding-top: 150px; */
+    padding-top: 150px;
     color: white;
     z-index: 10;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     flex-wrap: wrap;
     overflow: hidden;
     overflow-y: auto;
 }
 
 .entry {
-    width: 20%;
+    width: calc(25% - 20px);
     background-color: black;
     z-index: 10;
     position: relative;
     overflow-y: auto;
-    transition: all 500ms ease-in-out;
+    margin: 10px;
+    padding: 2px;
+    border: 1px solid white;
+    border-radius: 4px;
 }
 
-.entry:hover .entry {
-    z-index: 100;
-    transform: scale(1.5);
-
-}
 
 .entry span {
     color: grey;
@@ -103,7 +112,7 @@ main {
 .no-results.active {
     display: block;
     position: absolute;
-    
+
 }
 
 .search {
@@ -131,6 +140,12 @@ main {
     height: auto;
 }
 
+.entry:hover {
+    transform: scale(1.05);
+    transition: all 0.8s;
+    z-index: 11;
+}
+
 .entry:hover .copertina {
     opacity: 0.2;
     transition: opacity 1s;
@@ -145,6 +160,21 @@ main {
     display: block;
 }
 
+.entry p, .entry h4, .entry span, .entry i {
+    padding: 2px;
+}
+.entry p, .entry h4 {
+    font-size: 14px;
+}
+
+.entry span, .entry i {
+    font-size: 12px;
+}
+
+.search h2 {
+    font-size: 20px;
+}
+
 @media (max-width:768px) {
     .header-wrapper {
         display: block;
@@ -153,12 +183,24 @@ main {
         text-align: center;
         margin: auto;
     }
+
     .entry {
-        width: 50%;
+        width: calc(33.3% - 20px);
     }
 
     .entry .overview {
         display: none;
     }
+}
 
+@media (max-width: 512px) {
+    .entry {
+        width: calc(50% - 20px);
+    }
+}
+
+@media (max-width: 368px) {
+    .entry {
+        width: calc(100% - 20px);
+    }
 }

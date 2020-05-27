@@ -5,13 +5,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Boolflix</title>
         <link rel="stylesheet" href="style.css">
-        <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
         <script src="https://kit.fontawesome.com/a41fcd4d62.js" crossorigin="anonymous"></script>
     </head>
     <body>
-
         <div class="background"></div>
         <header>
             <div class="container header-wrapper">
@@ -20,13 +19,13 @@
                 </div>
                 <div class="ricerca">
                     <input type="text" placeholder="Titoli, persone, generi.." size="30">
-                    <button>Cerca</button>
+                    <button><i class="fas fa-search"></i></button>
                 </div>
             </div>
         </header>
-        <!-- <div class="search">
+        <div class="search">
             <h2>Risultati per la ricerca: <span></span></h2>
-        </div> -->
+        </div>
         <main>
             <div class="no-results">
                 <h2>La ricerca non ha prodotto alcuni risulato..</h2>
@@ -34,7 +33,9 @@
         </main>
         <script id="entry-template" type="text/x-handlebars-template">
                 <div class="entry">
-                    <img class='copertina' src="{{immagine}}" alt="">
+                    <div class="img-wrapper">
+                        <img class='copertina' src="{{immagine}}" alt="">
+                    </div>
                     <div class="entry-hover">
                         <h4 value='{{title}}'><span>Titolo: </span>{{title}}</h4>
                         <p value='{{original_title}}'><span>Titolo originale: </span>{{original_title}}</p>

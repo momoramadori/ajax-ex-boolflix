@@ -105,7 +105,7 @@ $(document).ready(function() {
             'language': bandiere_lingua(risultati.original_language),
             'immagine': genera_immagini(risultati.poster_path),
             // 'cast': 'https://api.themoviedb.org/3/credit/'+ risultati.id,
-            'riassunto': risultati.overview,
+            'riassunto': riassunto(risultati.overview),
             'tipo': tipologia
         }
         var html = template(context);
@@ -123,8 +123,8 @@ $(document).ready(function() {
             } else {
                 stella +='<i class="far fa-star"></i>'
             }
-        } 
-        return stella 
+        }
+        return stella
     }
 
     //funzione per generare le bandiere
@@ -135,13 +135,28 @@ $(document).ready(function() {
         } return lingua;
     }
 
-    //funzione per generare immagine sostitutiva nelle immagini senza path 
+    //funzione per generare immagine sostitutiva nelle immagini senza path
     function genera_immagini(img) {
         if (img === null) {
             return 'img/netflix_black.png'
         } return 'https://image.tmdb.org/t/p/w342' + img
     }
-    
+
+    //funzione per generare testo
+    function riassunto(testo) {
+        var contenuto='';
+        if (testo.length != 0) {
+            if (testo.length > 100) {
+                contenuto = testo.substr(0,100) + '...'
+            } else {
+                contenuto = testo
+            }
+        } else {
+            contenuto = 'Overview non disponibile'
+        } return contenuto
+    }
 })
+
+
 
 //per riuscire a fare la milestone 5 creare una chiamata ajax che generi l'url dinamicamente in base al film preso in considerazione (altra chiamata ajax) DA FARE DOMANI
