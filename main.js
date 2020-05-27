@@ -75,8 +75,8 @@ $(document).ready(function() {
     function hide_original_title() {
         $('.entry').each(function(){
             //se il titolo è uguale al titolo originale li nascondo
-            if($(this).find('h4').attr('value') == $(this).find('p:first-of-type').attr('value')) {
-                $(this).find('p:first-of-type').remove();
+            if($(this).find('p:first-of-type').attr('value') == $(this).find('p:nth-of-type(2)').attr('value')) {
+                $(this).find('p:nth-of-type(2)').remove();
             }
         })
     }
