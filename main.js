@@ -110,29 +110,25 @@ $(document).ready(function() {
         }
         var html = template(context);
         $('main').append(html);
-
-        if (risultati.hasOwnProperty('original_title')){
-            var cast_film = genera_cast_film(risultati.id);
-            console.log(cast_film); //undefined
-            $('.entry[data-id='+risultati.id+']').append(cast_film)
+        if ( risultati.hasOwnProperty('original_title')) {
+            genera_cast_film(risultati.id)
         } else {
-            var cast_serie = genera_cast_serie(risultati.id);
-            $('.entry[data-id='+risultati.id+']').append(cast_serie)
+            genera_cast_serie(risultati.id)
         }
-
     }
 
     //funzione per recuperare  il cast dei film
-    function genera_cast_film(risultati) {
+    function genera_cast_film(id) {
 
         $.ajax({
-            'url': 'https://api.themoviedb.org/3/movie/' + risultati + '/credits',
+            'url': 'https://api.themoviedb.org/3/movie/' + id + '/credits',
             'method':'GET',
             'data':{
                 'api_key': api_key,
             },
             'success': function(data) {
-                genera_credits(data)
+                var pippo = genera_credits(data);
+                $('.entry[data-id='+id+'] p.cast').append(pippo);
             },
             'error': function() {
                 alert('error!')
@@ -141,16 +137,17 @@ $(document).ready(function() {
     }
 
     //funzione per recuperare il cast delle serie
-    function genera_cast_serie(risultati) {
+    function genera_cast_serie(id) {
 
         $.ajax({
-            'url': 'https://api.themoviedb.org/3/tv/' + risultati + '/credits',
+            'url': 'https://api.themoviedb.org/3/tv/' + id + '/credits',
             'method':'GET',
             'data':{
                 'api_key': api_key,
             },
             'success': function(data) {
-                return genera_credits(data)
+                var pippo = genera_credits(data);
+                $('.entry[data-id='+id+'] p.cast').append(pippo);
             },  
             'error': function(){
                 alert('error!')
@@ -168,8 +165,7 @@ $(document).ready(function() {
                 array.push(cast)
             }
             var cast = array.toString();
-            console.log(cast);
-            return cast 
+            return cast
         } else {
             for (let index = 0; index < data.cast.length; index++) {
                 if (data.cast[index].hasOwnProperty('name') ) {
@@ -178,8 +174,6 @@ $(document).ready(function() {
                 }
             }
             var cast = array.toString();
-            console.log(cast);
-            
             return cast
 
             // var array = [];
@@ -240,7 +234,7 @@ $(document).ready(function() {
                 contenuto = testo
             }
         } else {
-            contenuto = 'Overview non disponibile'
+            contenuto = 'non disponibile!'
         } return contenuto
     }
 })

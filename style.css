@@ -160,21 +160,46 @@ main {
     display: block;
 }
 
-.entry p, .entry h4, .entry span, .entry i {
-    padding: 2px;
+.entry p, .entry h4, .entry span {
+    padding: 10px;
 }
+
 .entry p, .entry h4 {
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .entry span, .entry i {
-    font-size: 12px;
+    font-size: 18px;
 }
 
 .search h2 {
-    font-size: 20px;
+    font-size: 24px;
 }
 
+.entry-hover > span {
+    display: block;
+}
+
+.overview span {
+    display: block;
+}
+
+@media (max-width: 1400px) {
+    .entry p, .entry h4, .entry span, .entry i {
+        padding: 2px;
+    }
+    .entry p, .entry h4 {
+        font-size: 14px;
+    }
+    
+    .entry span, .entry i {
+        font-size: 12px;
+    }
+    
+    .search h2 {
+        font-size: 20px;
+    }
+}
 @media (max-width:768px) {
     .header-wrapper {
         display: block;
@@ -191,6 +216,7 @@ main {
     .entry .overview {
         display: none;
     }
+    
 }
 
 @media (max-width: 512px) {
