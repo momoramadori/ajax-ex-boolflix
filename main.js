@@ -96,8 +96,8 @@ $(document).ready(function() {
 
     //funzione per assegnare i valori dei risultati all'html con handlebars
     function disegna_film(risultati,tipologia) {
+
         //creo un oggetto da poter inserire nel template di handlebars con i corrispondenti valori
-        
         var context = {
             'title': risultati.title || risultati.name,
             'original_title': risultati.original_title || risultati.original_name,
@@ -110,88 +110,54 @@ $(document).ready(function() {
         }
         var html = template(context);
         $('main').append(html);
-        if ( risultati.hasOwnProperty('original_title')) {
-            genera_cast_film(risultati.id)
-        } else {
-            genera_cast_serie(risultati.id)
-        }
+        genera_cast(risultati.id,risultati)
     }
 
+    
     //funzione per recuperare  il cast dei film
-    function genera_cast_film(id) {
-
+    function genera_cast(id,risultati) {
+        
+        if ( risultati.hasOwnProperty('original_title')) {
+            var url = 'https://api.themoviedb.org/3/movie/' + id + '/credits'
+        } else {
+            var url = 'https://api.themoviedb.org/3/tv/' + id + '/credits'
+        }
         $.ajax({
-            'url': 'https://api.themoviedb.org/3/movie/' + id + '/credits',
+            'url': url,
             'method':'GET',
             'data':{
                 'api_key': api_key,
             },
             'success': function(data) {
                 var pippo = genera_credits(data);
-                $('.entry[data-id='+id+'] p.cast').append(pippo);
+                if (pippo != '') {
+                    $('.entry[data-id='+id+'] p.cast').append(pippo);
+                } else {
+                    $('.entry[data-id='+id+'] p.cast').append('no cast availale!');
+                }
             },
             'error': function() {
                 alert('error!')
             }
         }) 
     }
-
-    //funzione per recuperare il cast delle serie
-    function genera_cast_serie(id) {
-
-        $.ajax({
-            'url': 'https://api.themoviedb.org/3/tv/' + id + '/credits',
-            'method':'GET',
-            'data':{
-                'api_key': api_key,
-            },
-            'success': function(data) {
-                var pippo = genera_credits(data);
-                $('.entry[data-id='+id+'] p.cast').append(pippo);
-            },  
-            'error': function(){
-                alert('error!')
-            }
-        })
-    }
-
+        
     //funzione che restitutisce i credits dei singoli film/serie
     function genera_credits(data) {
         var array = [];
-        if (data.cast.length >= 5 ) {
-            for (let index = 0; index < 5; index++) {
-                if(data.cast[index].hasOwnProperty('name'))
-                var cast = data.cast[index].name;
-                array.push(cast)
-            }
-            var cast = array.toString();
-            return cast
-        } else {
-            for (let index = 0; index < data.cast.length; index++) {
-                if (data.cast[index].hasOwnProperty('name') ) {
-                    var cast = data.cast[index].name;
-                    array.push(cast)
+        var index = 0;
+            do {
+                if(data.cast[index] != undefined && data.cast[index].name != undefined) {
+                    if (data.cast[index].hasOwnProperty('name')) {
+                        var cast = data.cast[index].name;
+                        array.push(cast)
+                        index++
+                    } 
                 }
-            }
+            } while (array.length < 5 && array.length < data.cast.length);
             var cast = array.toString();
             return cast
-
-            // var array = [];
-            // var index = 0; 
-            // do {
-            //     if(data.cast[index].hasOwnProperty('name')) {
-            //         var cast = data.cast[index].name;
-            //         array.push(cast)
-            //     }
-            //     index++
-            // } while (index < 5 && index < data.cast.length);
-            // var cast = array.toString();
-            // console.log(cast);
-            // return cast 
-        }
     }
-        
-
 
     
 
@@ -234,7 +200,7 @@ $(document).ready(function() {
                 contenuto = testo
             }
         } else {
-            contenuto = 'non disponibile!'
+            contenuto = 'no overview available!'
         } return contenuto
     }
 })
