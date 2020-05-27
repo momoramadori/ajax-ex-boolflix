@@ -104,22 +104,23 @@ $(document).ready(function() {
             'vote': genera_stelle(risultati.vote_average),
             'language': bandiere_lingua(risultati.original_language),
             'immagine': genera_immagini(risultati.poster_path),
-            'cast': function() {
-                if (risultati.hasOwnProperty('original_title')){
-                    return genera_cast_film(risultati.id)
-                } else {
-                    return genera_cast_serie(risultati.id)
-                }
-            },
+            'id': risultati.id,
             'riassunto': riassunto(risultati.overview),
             'tipo': tipologia
         }
-       
         var html = template(context);
         $('main').append(html);
 
-    }
+        if (risultati.hasOwnProperty('original_title')){
+            var cast_film = genera_cast_film(risultati.id);
+            console.log(cast_film); //undefined
+            $('.entry[data-id='+risultati.id+']').append(cast_film)
+        } else {
+            var cast_serie = genera_cast_serie(risultati.id);
+            $('.entry[data-id='+risultati.id+']').append(cast_serie)
+        }
 
+    }
 
     //funzione per recuperare  il cast dei film
     function genera_cast_film(risultati) {
@@ -149,7 +150,7 @@ $(document).ready(function() {
                 'api_key': api_key,
             },
             'success': function(data) {
-                genera_credits(data)
+                return genera_credits(data)
             },  
             'error': function(){
                 alert('error!')
@@ -178,9 +179,25 @@ $(document).ready(function() {
             }
             var cast = array.toString();
             console.log(cast);
+            
             return cast
+
+            // var array = [];
+            // var index = 0; 
+            // do {
+            //     if(data.cast[index].hasOwnProperty('name')) {
+            //         var cast = data.cast[index].name;
+            //         array.push(cast)
+            //     }
+            //     index++
+            // } while (index < 5 && index < data.cast.length);
+            // var cast = array.toString();
+            // console.log(cast);
+            // return cast 
         }
     }
+        
+
 
     
 
