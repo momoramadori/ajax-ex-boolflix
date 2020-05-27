@@ -97,22 +97,24 @@ $(document).ready(function() {
     //funzione per assegnare i valori dei risultati all'html con handlebars
     function disegna_film(risultati,tipologia) {
         //creo un oggetto da poter inserire nel template di handlebars con i corrispondenti valori
+        
         var context = {
             'title': risultati.title || risultati.name,
             'original_title': risultati.original_title || risultati.original_name,
             'vote': genera_stelle(risultati.vote_average),
             'language': bandiere_lingua(risultati.original_language),
             'immagine': genera_immagini(risultati.poster_path),
-            'cast': function(){
-                if (risultati.hasOwnProperty('original_title')) {
-                    genera_cast_film(risultati.id)
+            'cast': function() {
+                if (risultati.hasOwnProperty('original_title')){
+                    return genera_cast_film(risultati.id)
                 } else {
-                    genera_cast_serie(risultati.id)
-                }  
+                    return genera_cast_serie(risultati.id)
+                }
             },
             'riassunto': riassunto(risultati.overview),
             'tipo': tipologia
         }
+       
         var html = template(context);
         $('main').append(html);
 
