@@ -50,7 +50,7 @@ $(document).ready(function() {
                 'language':'it'
             },
             'success': function(data) {
-                var founded_elements = data.results;
+                var founded_elements = data.results;                
                 genera_dati(founded_elements,tipo);
                 hide_original_title();
                 info_extra(ricerca);
@@ -67,7 +67,6 @@ $(document).ready(function() {
         for (var i = 0; i < film_trovati.length; i++) {
             //utilizzo una variabile per salvare gli oggetti
             var risultati = film_trovati[i];
-            console.log(risultati);
             disegna_film(risultati,tipo)
         }
     }
@@ -104,7 +103,13 @@ $(document).ready(function() {
             'vote': genera_stelle(risultati.vote_average),
             'language': bandiere_lingua(risultati.original_language),
             'immagine': genera_immagini(risultati.poster_path),
-            // 'cast': 'https://api.themoviedb.org/3/credit/'+ risultati.id,
+            'cast': function(){
+                if (risultati.hasOwnProperty('original_title')) {
+                    genera_cast_film(risultati.id)
+                } else {
+                    genera_cast_serie(risultati.id)
+                }  
+            },
             'riassunto': riassunto(risultati.overview),
             'tipo': tipologia
         }
@@ -112,6 +117,70 @@ $(document).ready(function() {
         $('main').append(html);
 
     }
+
+
+    //funzione per recuperare  il cast dei film
+    function genera_cast_film(risultati) {
+
+        $.ajax({
+            'url': 'https://api.themoviedb.org/3/movie/' + risultati + '/credits',
+            'method':'GET',
+            'data':{
+                'api_key': api_key,
+            },
+            'success': function(data) {
+                genera_credits(data)
+            },
+            'error': function() {
+                alert('error!')
+            }
+        }) 
+    }
+
+    //funzione per recuperare il cast delle serie
+    function genera_cast_serie(risultati) {
+
+        $.ajax({
+            'url': 'https://api.themoviedb.org/3/tv/' + risultati + '/credits',
+            'method':'GET',
+            'data':{
+                'api_key': api_key,
+            },
+            'success': function(data) {
+                genera_credits(data)
+            },  
+            'error': function(){
+                alert('error!')
+            }
+        })
+    }
+
+    //funzione che restitutisce i credits dei singoli film/serie
+    function genera_credits(data) {
+        var array = [];
+        if (data.cast.length >= 5 ) {
+            for (let index = 0; index < 5; index++) {
+                if(data.cast[index].hasOwnProperty('name'))
+                var cast = data.cast[index].name;
+                array.push(cast)
+            }
+            var cast = array.toString();
+            console.log(cast);
+            return cast 
+        } else {
+            for (let index = 0; index < data.cast.length; index++) {
+                if (data.cast[index].hasOwnProperty('name') ) {
+                    var cast = data.cast[index].name;
+                    array.push(cast)
+                }
+            }
+            var cast = array.toString();
+            console.log(cast);
+            return cast
+        }
+    }
+
+    
 
     //funzione per generare le stelle
     function genera_stelle(voti) {
@@ -159,4 +228,4 @@ $(document).ready(function() {
 
 
 
-//per riuscire a fare la milestone 5 creare una chiamata ajax che generi l'url dinamicamente in base al film preso in considerazione (altra chiamata ajax) DA FARE DOMANI
+
