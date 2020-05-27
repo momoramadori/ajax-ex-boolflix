@@ -19,13 +19,13 @@
                 </div>
                 <div class="ricerca">
                     <input type="text" placeholder="Titoli, persone, generi.." size="30">
-                    <button><i class="fas fa-search"></i></button>
+                    <i class="fas fa-search"></i>
                 </div>
             </div>
         </header>
-        <div class="search">
+        <!-- <div class="search">
             <h2>Risultati per la ricerca: <span></span></h2>
-        </div>
+        </div> -->
         <main>
             <div class="no-results">
                 <h2>La ricerca non ha prodotto alcuni risulato..</h2>
@@ -37,14 +37,14 @@
                         <img class='copertina' src="{{immagine}}" alt="">
                     </div>
                     <div class="entry-hover">
-                        <h4 value='{{title}}'><span>Titolo: </span>{{title}}</h4>
+                        <p value='{{title}}'><span>Titolo: </span>{{title}}</p>
                         <p value='{{original_title}}'><span>Titolo originale: </span>{{original_title}}</p>
                         <p class='lingua' value='{{language}}'><span>Lingua originale: </span>{{{language}}}</p>
                         <p><span>Tipologia:</span>{{tipo}}</p>
                         <p class="voto" value='{{vote}}'><span>Voto medio: </span>{{{vote}}}</p>
                         <span> Cast: </span>
                         <p class='cast'></p>
-                        <span>Overview:</span>
+                        <span class='overview'>Overview:</span>
                         <p class='overview'>{{riassunto}}</p>
                     </div>
                 </div>

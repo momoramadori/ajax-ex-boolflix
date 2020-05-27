@@ -6,7 +6,7 @@ $(document).ready(function() {
     var source   = $("#entry-template").html();
     var template = Handlebars.compile(source);
     //intercetto il click sul bottone
-    $('.btn').click(all_search)
+    $('i.fa-search').click(all_search)
     //stesso evento con invio
     $('header input').keypress(function(event) {
         // verifico se l'utente ha digitato "ENTER"
@@ -17,6 +17,7 @@ $(document).ready(function() {
 
     //funzione per le la ricerca utente
     function all_search() {
+        $('input').addClass('active');
         //creo una variabile per salvare l'input dell'utente
         var testo_utente = $('input').val();
         //se l'input non ha caratteri non faccio la chiamata ajax
@@ -25,7 +26,6 @@ $(document).ready(function() {
             ajax_call(testo_utente,'movie',' Movie');
             ajax_call(testo_utente,'tv',' Serie tv');
         } else {
-            alert('devi digitare almeno 2 caratteri')
         }
     }
 
@@ -96,8 +96,8 @@ $(document).ready(function() {
 
     //funzione per assegnare i valori dei risultati all'html con handlebars
     function disegna_film(risultati,tipologia) {
-
         //creo un oggetto da poter inserire nel template di handlebars con i corrispondenti valori
+        
         var context = {
             'title': risultati.title || risultati.name,
             'original_title': risultati.original_title || risultati.original_name,
@@ -116,7 +116,6 @@ $(document).ready(function() {
     
     //funzione per recuperare  il cast dei film
     function genera_cast(id,risultati) {
-        
         if ( risultati.hasOwnProperty('original_title')) {
             var url = 'https://api.themoviedb.org/3/movie/' + id + '/credits'
         } else {
