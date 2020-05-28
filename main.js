@@ -21,7 +21,7 @@ $(document).ready(function() {
 
         // MILESTONE 6
 
-        // //rendo visibili i filtri
+        //rendo visibili i filtri
         // $('select').addClass('active');
         // $('label').addClass('active');
         
@@ -250,6 +250,14 @@ $(document).ready(function() {
                 }  
             }  
         }
+        //verificare se la scelta include il genere del film
+
+        // $('label[for="select"]').text('Filtra Film per genere');
+        // $('select').change(function(){
+        //     if(!lista_generi_risultato.includes(this.value)) {
+        //         $('.entry[data-id="'+risultati.id+'"]').hide();
+        //     }
+        // })
         var numeri_generi = risultati.genre_ids.join(',');
         var lista_stringa = lista_generi_risultato.join(', ')
         if(numeri_generi != '') {
@@ -259,7 +267,7 @@ $(document).ready(function() {
 
 
 //DA FARE MILESTONE 6
-
+//generare la select del film
 // function select_film() {
 //     $.ajax({
 //         'url': 'https://api.themoviedb.org/3/genre/movie/list',
@@ -268,18 +276,11 @@ $(document).ready(function() {
 //             'api_key': api_key,
 //         },
 //         'success': function(data) {
-//             for (let index = 0; index < data.genres.length; index++) {
+            // for (let index = 0; index < data.genres.length; index++) {
 //                 var nome_genere = data.genres[index].name;
 //                 $('#select').append('<option value="'+nome_genere+'">'+nome_genere+'</option>')
-//             }
-//             $('label[for="select"]').text('Filtra Film per genere');
-//             $('#select').change(function(){
-//                 $('.entry').each(function(){
-//                     if ($(this).find($('p.generi').text().includes($('#select').value))) {
-//                         $(this).show();
-//                     } else {$(this).hide();}
-//                  })
-//             })
+//                 }
+//                 $('label[for="select"]').text('Filtra Serie Tv per genere')
 //         },
 //         'error': function() {
 //             alert('error!')
@@ -303,17 +304,7 @@ $(document).ready(function() {
 //                 $('#select-2').append('<option value="'+nome_genere+'">'+nome_genere+'</option>')
 //             }
 //             $('label[for="select-2"]').text('Filtra Serie Tv per genere')
-//             $('#select-2').change(function(){
-//                 console.log(this.value);
-                
-//                 $('.entry').each(function(){
-//                     console.log($(this).find($('p.generi').text()));
-                    
-//                     if ($(this).find($('p.generi').text().includes($('#select-2').value.text()))) {
-//                         $(this).show();
-//                     } else {$(this).hide()}
-//                  })
-//             })
+//            
 //         },
 //         'error': function() {
 //             alert('error!')
