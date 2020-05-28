@@ -193,8 +193,8 @@ $(document).ready(function() {
     function riassunto(testo) {
         var contenuto='';
         if (testo.length != 0) {
-            if (testo.length > 100) {
-                contenuto = testo.substr(0,100) + '...'
+            if (testo.length > 150) {
+                contenuto = testo.substr(0,150) + '...'
             } else {
                 contenuto = testo
             }
