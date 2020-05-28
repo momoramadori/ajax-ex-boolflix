@@ -51,6 +51,7 @@ header select, header label {
 header select.active, header label.active {
     display: inline-block;
 }
+
 header input {
     display: inline-block;
     background-color: black;
