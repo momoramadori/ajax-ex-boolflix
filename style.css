@@ -44,13 +44,14 @@ header .logo img {
     width: auto;
     height: 50px;
 }
-
-header input { 
+header select, header label {
     display: none;
-    width: 0px;
 }
 
-header input.active {
+header select.active, header label.active {
+    display: inline-block;
+}
+header input {
     display: inline-block;
     background-color: black;
     border: 1px solid white;
@@ -65,6 +66,7 @@ header button {
     padding: 5px 10px;
     color: white;
     font-size: 20px;
+    float: right;
 }
 header input:focus, button:focus {
     outline: 0;
