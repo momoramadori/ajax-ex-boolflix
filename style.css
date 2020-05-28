@@ -169,7 +169,7 @@ main {
     display: block;
 }
 
-.entry p, .entry h4, .entry span {
+.entry p, .entry span {
     padding: 10px;
 }
 
