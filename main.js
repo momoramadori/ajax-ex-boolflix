@@ -19,11 +19,9 @@ $(document).ready(function() {
     //funzione per le la ricerca utente
     function all_search() {
 
-        // MILESTONE 6
-
         //rendo visibili i filtri
-        // $('select').addClass('active');
-        // $('label').addClass('active');
+        $('select').addClass('active');
+        $('label').addClass('active');
         
         //creo una variabile per salvare l'input dell'utente
         var testo_utente = $('input').val();
@@ -32,7 +30,6 @@ $(document).ready(function() {
             reset_iniziale();
             ajax_call(testo_utente,'movie',' Movie');
             ajax_call(testo_utente,'tv',' Serie tv');
-        } else {
         }
     }
 
@@ -75,6 +72,7 @@ $(document).ready(function() {
             //utilizzo una variabile per salvare gli oggetti
             var risultati = film_trovati[i];
             disegna_film(risultati,tipo)
+            select(risultati)
         }
     }
 
@@ -120,6 +118,35 @@ $(document).ready(function() {
         $('main').append(html);
         genera_cast(risultati.id,risultati);
         genera_genres(risultati)
+    }
+
+
+    //chiamata ajax per generare la select con i generi
+    function select(risultati) {
+
+        if ( risultati.hasOwnProperty('original_title')) {
+            var url = 'https://api.themoviedb.org/3/genre/movie/list'
+        } else {
+            var url = 'https://api.themoviedb.org/3/genre/tv/list'
+        }
+        $.ajax({
+            'url': url,
+            'method':'GET',
+            'data':{
+                'api_key': api_key,
+            },
+            'success': function(data) {
+                for (let index = 0; index < data.genres.length; index++) {
+                    var nome_genere = data.genres[index].name;
+                    if(nome_genere != $('option[value="'+nome_genere+'"]').text() )
+                    $('#select').append('<option value="'+nome_genere+'">'+nome_genere+'</option>')
+                }
+            
+            },
+            'error': function() {
+                alert('error!')
+            }
+        }) 
     }
 
     //funzione per generare le stelle
@@ -250,65 +277,21 @@ $(document).ready(function() {
                 }  
             }  
         }
+        //parte MILESTONE 6
         //verificare se la scelta include il genere del film
-
-        // $('label[for="select"]').text('Filtra Film per genere');
-        // $('select').change(function(){
-        //     if(!lista_generi_risultato.includes(this.value)) {
-        //         $('.entry[data-id="'+risultati.id+'"]').hide();
-        //     }
-        // })
+        $('select').change(function(){
+            $('.entry[data-id="'+risultati.id+'"]').show();
+            if ( this.value == $('option').val()){
+                $('.entry[data-id="'+risultati.id+'"]').show();
+            } else if(!lista_generi_risultato.includes(this.value)) {
+                $('.entry[data-id="'+risultati.id+'"]').hide();
+            }
+        })
+        
         var numeri_generi = risultati.genre_ids.join(',');
         var lista_stringa = lista_generi_risultato.join(', ')
         if(numeri_generi != '') {
             $('.entry[data-id="'+risultati.id+'"] p.generi').append(lista_stringa)
         }
-}
-
-
-//DA FARE MILESTONE 6
-//generare la select del film
-// function select_film() {
-//     $.ajax({
-//         'url': 'https://api.themoviedb.org/3/genre/movie/list',
-//         'method':'GET',
-//         'data':{
-//             'api_key': api_key,
-//         },
-//         'success': function(data) {
-            // for (let index = 0; index < data.genres.length; index++) {
-//                 var nome_genere = data.genres[index].name;
-//                 $('#select').append('<option value="'+nome_genere+'">'+nome_genere+'</option>')
-//                 }
-//                 $('label[for="select"]').text('Filtra Serie Tv per genere')
-//         },
-//         'error': function() {
-//             alert('error!')
-//         }
-//     }) 
-// }
-
-// select_film()
-// select_tv()
-
-//     function select_tv() {
-//     $.ajax({
-//         'url': 'https://api.themoviedb.org/3/genre/tv/list',
-//         'method':'GET',
-//         'data':{
-//             'api_key': api_key,
-//         },
-//         'success': function(data) {
-//             for (let index = 0; index < data.genres.length; index++) {
-//                 var nome_genere = data.genres[index].name;
-//                 $('#select-2').append('<option value="'+nome_genere+'">'+nome_genere+'</option>')
-//             }
-//             $('label[for="select-2"]').text('Filtra Serie Tv per genere')
-//            
-//         },
-//         'error': function() {
-//             alert('error!')
-//         }
-//     }) 
-//     }
+    }
 })

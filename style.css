@@ -44,11 +44,12 @@ header .logo img {
     width: auto;
     height: 50px;
 }
-header select, header label {
+
+header select{
     display: none;
 }
 
-header select.active, header label.active {
+header select.active {
     display: inline-block;
 }
 
@@ -69,6 +70,7 @@ header button {
     font-size: 20px;
     float: right;
 }
+
 header input:focus, button:focus {
     outline: 0;
 }
@@ -93,7 +95,7 @@ main {
     position: relative;
     overflow-y: hidden;
     padding: 2px;
-    max-height: 550px;
+    max-height: 650px;
 }
 
 .entry span {
@@ -227,7 +229,9 @@ main {
     .entry .overview {
         display: none;
     }
-    
+    .select {
+        display: none;;
+    }
 }
 
 @media (max-width: 512px) {
