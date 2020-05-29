@@ -22,6 +22,7 @@ $(document).ready(function() {
         //rendo visibili i filtri
         $('select').addClass('active');
         $('label').addClass('active');
+        $('select').val('Tutti i generi')
         
         //creo una variabile per salvare l'input dell'utente
         var testo_utente = $('input').val();
