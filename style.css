@@ -20,11 +20,6 @@ body {
     z-index: -1;
 }
 
-.container {
-    width: 80%;
-    margin: auto;
-}
-
 header {
     height: 100px;
     width: 100%;
@@ -43,6 +38,7 @@ header {
 header .logo img {
     width: auto;
     height: 50px;
+    margin-left: 40px;
 }
 
 header #logo1 {

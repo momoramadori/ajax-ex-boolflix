@@ -13,8 +13,8 @@ $(document).ready(function() {
 
     var source   = $("#entry-template").html();
     var template = Handlebars.compile(source);
-    //intercetto il click sul bottone
-    $('i.fa-search').click(all_search)
+    // //intercetto il click sul bottone
+    // $('i.fa-search').click(all_search)
     //stesso evento con invio
     $('header input').keypress(function(event) {
         // verifico se l'utente ha digitato "ENTER"
