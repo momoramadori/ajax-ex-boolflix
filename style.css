@@ -28,6 +28,10 @@ header {
     z-index: 100;
 }
 
+header select {
+    margin-right: 80px;
+}
+
 .header-wrapper {
     display: flex;
     justify-content: space-between;

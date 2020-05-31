@@ -307,20 +307,19 @@ $(document).ready(function() {
             $('.entry[data-id="'+risultati.id+'"]').show();
             if ( this.value == $('option').val()){
                 $('.entry[data-id="'+risultati.id+'"]').show();
-                if($('.film-wrapper').children('.entry').is(":visible")) {
-                    $('.type.films').addClass('active');
-                }
-                if(($('.shows-wrapper').children('.entry').is(":visible"))) {
-                    $('.type.shows').addClass('active')
-                }
             } else if(!lista_generi_risultato.includes(this.value)) {
                 $('.entry[data-id="'+risultati.id+'"]').hide();
             }
 
-            if($('.film-wrapper').children().is(":hidden")) {
+            if($('.film-wrapper').children('.entry:visible').length > 0) {
+                $('.type.films').addClass('active');
+            } else {
                 $('.type.films').removeClass('active');
             }
-            if(($('.shows-wrapper').children().is(":hidden"))) {
+
+            if(($('.shows-wrapper').children('.entry:visible').length > 0)) {
+                $('.type.shows').addClass('active')
+            } else {
                 $('.type.shows').removeClass('active')
             }
         })
