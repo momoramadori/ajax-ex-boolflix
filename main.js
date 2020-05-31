@@ -20,16 +20,13 @@ $(document).ready(function() {
         // verifico se l'utente ha digitato "ENTER"
         if(event.which == 13) {
             all_search();
-
         }
     })
 
     //funzione per le la ricerca utente
     function all_search() {
-
-        //rendo visibili i filtri
-        $('select').val('Tutti i generi')
         
+        $('select').val('Tutti i generi')
         //creo una variabile per salvare l'input dell'utente
         var testo_utente = $('input').val();
         //se l'input non ha caratteri non faccio la chiamata ajax
@@ -97,11 +94,11 @@ $(document).ready(function() {
     function info_extra(ricerca) {
         $('.no-results').removeClass('active');
         $('.search').removeClass('active');
-        if( $('main').children().length == 1 ) {
+        if( $('.film-wrapper').children().length == 0 && $('.shows-wrapper').children().length == 0 ) {
             $('.no-results').addClass('active');
+            $('.type').removeClass('active')
             $('.search').removeClass('active');
-        } else if ($('main').children().length > 1){
-            $('.search').addClass('active');
+        } else if ($('.film-wrapper').children().length > 0  && $('.shows-wrapper').children().length > 0) {
             $('.search h2 span').text(ricerca)
         }
     }
@@ -122,11 +119,30 @@ $(document).ready(function() {
             'stringa_generi': risultati.genre_ids.join(',')
         }
         var html = template(context);
-        $('main').append(html);
+        if(risultati.hasOwnProperty('original_title')) {
+            $('main .film-wrapper').append(html);
+        } else {
+            $('main .shows-wrapper').append(html);
+        }
+        console.log($('.film-wrapper').children().length);
+        console.log($('.shows-wrapper').children().length);
+        
         genera_cast(risultati.id,risultati);
-        genera_genres(risultati)
-    }
+        genera_genres(risultati);
 
+        if($('.film-wrapper').children().length == 0) {
+            $('.type.films').removeClass('active');
+        } else {
+            $('.type.films').addClass('active');
+        }
+        if($('.shows-wrapper').children().length == 0) {
+            $('.type.shows').removeClass('active')
+        } else {
+            $('.type.shows').addClass('active')
+        }
+
+       
+    }
 
     //chiamata ajax per generare la select con i generi
     function select(risultati) {
@@ -287,14 +303,28 @@ $(document).ready(function() {
         //parte MILESTONE 6
         //verificare se la scelta include il genere del film
         $('select').change(function(){
+            
             $('.entry[data-id="'+risultati.id+'"]').show();
             if ( this.value == $('option').val()){
                 $('.entry[data-id="'+risultati.id+'"]').show();
+                if($('.film-wrapper').children('.entry').is(":visible")) {
+                    $('.type.films').addClass('active');
+                }
+                if(($('.shows-wrapper').children('.entry').is(":visible"))) {
+                    $('.type.shows').addClass('active')
+                }
             } else if(!lista_generi_risultato.includes(this.value)) {
                 $('.entry[data-id="'+risultati.id+'"]').hide();
             }
+
+            if($('.film-wrapper').children().is(":hidden")) {
+                $('.type.films').removeClass('active');
+            }
+            if(($('.shows-wrapper').children().is(":hidden"))) {
+                $('.type.shows').removeClass('active')
+            }
         })
-        
+
         var numeri_generi = risultati.genre_ids.join(',');
         var lista_stringa = lista_generi_risultato.join(', ')
         if(numeri_generi != '') {

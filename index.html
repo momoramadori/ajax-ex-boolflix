@@ -38,6 +38,18 @@
             <div class="no-results">
                 <h2>La ricerca non ha prodotto alcuni risulato..</h2>
             </div>
+            <div class="film">
+                <Span class="type films">Film</Span>
+                <div class="film-wrapper">
+
+                </div>
+            </div>
+            <div class="tv-shows">
+                <Span class='type shows'>Serie Tv</Span>
+                <div class="shows-wrapper">
+
+                </div>
+            </div>
         </main>
         <script id="entry-template" type="text/x-handlebars-template">
                 <div class="entry" data-id='{{id}}' data-generi='{{stringa_generi}}'>
@@ -46,7 +58,7 @@
                     </div>
                     <div class="entry-hover">
                         <p value='{{title}}'><span>Titolo: </span>{{title}}</p>
-                        <p value='{{original_title}}'><span>Titolo originale: </span>{{original_title}}</p>
+                        <p class='original' value='{{original_title}}'><span>Titolo originale: </span>{{original_title}}</p>
                         <p class='lingua' value='{{language}}'><span>Lingua originale: </span>{{{language}}}</p>
                         <p><span>Tipologia:</span>{{tipo}}</p>
                         <p class="voto" value='{{vote}}'><span>Voto medio: </span>{{{vote}}}</p>
