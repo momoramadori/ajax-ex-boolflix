@@ -1,4 +1,12 @@
 $(document).ready(function() {
+    
+    //search bar presa da Marco Faltoni
+    $(".btn-outline-secondary").click(function(){
+        $('.input-group-append').toggleClass('beat');
+        $(".form-control").toggleClass("active").focus;
+        $(this).toggleClass("animate");
+        $("#message").val("");
+    });
 
     var api_key = '0c5280dc3d5b58e1162d83dd9b44e7d5';
     var url_base = 'https://api.themoviedb.org/3/search/';
@@ -20,8 +28,6 @@ $(document).ready(function() {
     function all_search() {
 
         //rendo visibili i filtri
-        $('select').addClass('active');
-        $('label').addClass('active');
         $('select').val('Tutti i generi')
         
         //creo una variabile per salvare l'input dell'utente
