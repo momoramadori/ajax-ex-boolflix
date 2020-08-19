@@ -316,6 +316,10 @@ button:focus {
     .select {
         display: none;
     }
+
+    .film, .tv-shows {
+        padding: 10px 0;
+    }
 }
 
 @media (max-width: 512px) {
